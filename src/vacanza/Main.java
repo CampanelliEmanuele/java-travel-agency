@@ -1,17 +1,48 @@
 package vacanza;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        LocalDate startDate = LocalDate.of(2024, 1, 1);
-        LocalDate endDate = LocalDate.of(2024, 2, 1);
+        Scanner scanner = new Scanner(System.in);
+        boolean stop = false;
 
+        while (!stop) {
+            /* Get destination */
+            System.out.println("Inserimento dati per una nuova vacanza");
+            System.out.println("Inserire la destinazione: ");
+            String destination = scanner.nextLine();
 
-        Vacanza v = new Vacanza("destination", startDate, endDate);
+            /* Get startDate */
+            System.out.print("Inserire la data di inizio nel formato yyyy-mm-dd: ");
+            String inputDate = scanner.nextLine();
+            LocalDate startDate = LocalDate.parse(inputDate);
 
-        System.out.println(v.getHolidayDuration());
+            /* Get finalDate */
+            System.out.print("Inserire la data di fine nel formato yyyy-mm-dd: ");
+            inputDate = scanner.nextLine();
+            LocalDate endDate = LocalDate.parse(inputDate);
+
+            /* Create a new object */
+            Vacanza v = new Vacanza(destination, startDate, endDate);
+            System.out.println("Tutti i dati inseriti sono corretti, ho creato l'oggetto");
+
+            /* object print */
+            System.out.println(v.toString());
+
+            /* stop check */
+            System.out.println("Premere Y per inserire una nuova vacanza:\t");
+            String canStop = scanner.nextLine();
+            if (!canStop.equalsIgnoreCase("Y")) {
+                stop = true;
+            }
+        }
+
     }
 }
 

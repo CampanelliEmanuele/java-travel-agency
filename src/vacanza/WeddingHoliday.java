@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class WeddingHoliday extends Holiday {
 
-    ArrayList<String> treatments = new ArrayList<>();
+    ArrayList<String> treatments;
 
     public WeddingHoliday(String destination, LocalDate startDate, LocalDate finalDate, ArrayList<String> treatments) throws IllegalArgumentException {
         super(destination, startDate, finalDate);

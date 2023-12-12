@@ -22,7 +22,7 @@ public class GroupHoliday extends Holiday {
     }
 
     private boolean isInRange(int parameter, int min, int max) {
-        return mediumAge >= min && mediumAge <= max;
+        return parameter >= min && parameter <= max;
     }
 
     @Override

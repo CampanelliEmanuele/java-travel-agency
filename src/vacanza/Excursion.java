@@ -1,7 +1,5 @@
 package vacanza;
 
-import java.time.LocalDate;
-
 public class Excursion {
     private String city;
     private int duration;

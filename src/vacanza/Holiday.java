@@ -1,6 +1,7 @@
 package vacanza;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -9,6 +10,8 @@ public class Holiday {
     private String destination;
     private LocalDate startDate;
     private LocalDate finalDate;
+
+    private ArrayList<Excursion> excursionsList;
 
     public Holiday(String destination, LocalDate startDate, LocalDate finalDate) throws IllegalArgumentException {
         if (validDestination(destination)) {
@@ -42,6 +45,14 @@ public class Holiday {
                 " giorni a " + destination +
                 " dal " + startDate +
                 " al " + finalDate;
+    }
+
+    /* BONUS */
+    public double getExcursionsPrice() {
+        double totalPrice = 0d;
+        for (Excursion excursion : excursionsList)
+            totalPrice += excursion.getPrice();
+        return totalPrice;
     }
 
     /* VALIDATE FUNCTIONS */
@@ -85,5 +96,14 @@ public class Holiday {
     public void setFinalDate(LocalDate finalDate) {
         if (validFinalDate(finalDate, startDate))
             this.finalDate = finalDate;
+    }
+
+    public ArrayList<Excursion> getExcursionsList() {
+        return excursionsList;
+    }
+
+    public void setExcursionsList(ArrayList<Excursion> excursionsList) {
+        if (!excursionsList.isEmpty())
+            this.excursionsList = excursionsList;
     }
 }

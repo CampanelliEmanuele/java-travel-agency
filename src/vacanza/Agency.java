@@ -54,11 +54,13 @@ public class Agency {
                         /* getting more inputs */
                         System.out.print("Inserisci il numero di partecipanti: ");
                         int numberOfPeople = Integer.parseInt(scanner.nextLine());
-                        System.out.print("Inserisci l'età media dei partecipanti: ");
-                        int mediumAge = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Inserisci l'età minima dei partecipanti: ");
+                        int minAge = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Inserisci l'età massima dei partecipanti: ");
+                        int maxAge = Integer.parseInt(scanner.nextLine());
 
                         /* Create a new object and add it to the list */
-                        GroupHoliday groupHoliday = new GroupHoliday(destination, startDate, endDate, numberOfPeople, mediumAge);
+                        GroupHoliday groupHoliday = new GroupHoliday(destination, startDate, endDate, numberOfPeople, minAge, maxAge);
                         groupHoliday.setExcursionsList(defaultExcursions);
                         groupHolidayList.add(groupHoliday);
 
@@ -90,7 +92,7 @@ public class Agency {
                         break;
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("Uno o più dati inseriti non sono validi. Puoi riprovare nuovamente.");
+                System.out.println(e.getMessage());
             } finally {
                 /* stop check */
                 System.out.println("Premere Y per inserire una nuova vacanza:\t");

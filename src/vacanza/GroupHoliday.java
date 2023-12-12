@@ -3,34 +3,34 @@ package vacanza;
 import java.time.LocalDate;
 
 public class GroupHoliday extends Holiday {
-    private int numberOfPeople, mediumAge;
+    private int numberOfPeople, minAge, maxAge;
 
-    public GroupHoliday(String destination, LocalDate startDate, LocalDate finalDate, int numberOfPeople, int mediumAge) throws IllegalArgumentException {
+    public GroupHoliday(String destination, LocalDate startDate, LocalDate finalDate, int numberOfPeople, int minAge, int maxAge) throws IllegalArgumentException {
         super(destination, startDate, finalDate);
+        isInRange(numberOfPeople, 2, 100);
+        this.numberOfPeople = numberOfPeople;
 
-        if (isInRange(numberOfPeople, 2, 100)) {
-            this.numberOfPeople = numberOfPeople;
-        } else {
-            throw new IllegalArgumentException("ERROR: Devi inserire un numero di partecipanti compreso tra 2 e 100.");
-        }
+        isInRange(minAge, 0, maxAge);
+        this.minAge = minAge;
 
-        if (isInRange(mediumAge, 0, 100)) {
-            this.mediumAge = mediumAge;
-        } else {
-            throw new IllegalArgumentException("ERROR: L'età inserita deve essere compresa tra 0 e 100.");
-        }
-    }
-
-    private boolean isInRange(int parameter, int min, int max) {
-        return parameter >= min && parameter <= max;
+        isInRange(maxAge, minAge, 100);
+        this.maxAge = maxAge;
     }
 
     @Override
     public String toString() {
         return super.toString() +
                 " per un totale di " + numberOfPeople +
-                " persone, aventi un'età media di " + mediumAge +
+                " persone, aventi un'età compresa tra i " + minAge +
+                " e i " + maxAge +
                 " anni";
+    }
+
+    /* VALIDATORS */
+
+    private void isInRange(int parameter, int min, int max) {
+        if (parameter <= min || parameter >= max)
+            throw new IllegalArgumentException("ERROR: " + parameter + " non è compreso tra " + min + " e " + max);
     }
 
     /* GETTERS AND SETTERS */
@@ -40,16 +40,25 @@ public class GroupHoliday extends Holiday {
     }
 
     public void setNumberOfPeople(int numberOfPeople) {
-        if (isInRange(numberOfPeople, 2, 100))
-            this.numberOfPeople = numberOfPeople;
+        isInRange(numberOfPeople, 2, 100);
+        this.numberOfPeople = numberOfPeople;
     }
 
-    public int getMediumAge() {
-        return mediumAge;
+    public int getMinAge() {
+        return minAge;
     }
 
-    public void setMediumAge(int mediumAge) {
-        if (isInRange(mediumAge, 0, 100))
-            this.mediumAge = mediumAge;
+    public void setMinAge(int minAge) {
+        isInRange(minAge, 0, maxAge);
+        this.minAge = minAge;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(int maxAge) {
+        isInRange(maxAge, minAge, 100);
+        this.maxAge = maxAge;
     }
 }

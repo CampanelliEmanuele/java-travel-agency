@@ -11,12 +11,22 @@ public class Vacanza {
     private LocalDate finalDate;
 
     public Vacanza(String destination, LocalDate startDate, LocalDate finalDate) throws IllegalArgumentException {
-        if (validDestination(destination) && validStartDate(startDate) && validFinalDate(finalDate, startDate)) {
+        if (validDestination(destination)) {
             this.destination = destination;
+        } else {
+            throw new IllegalArgumentException("ERROR: invalid destination.");
+        }
+
+        if (validStartDate(startDate)) {
             this.startDate = startDate;
+        } else {
+            throw new IllegalArgumentException("ERROR: invalid  startDate.");
+        }
+
+        if (validFinalDate(finalDate, startDate)) {
             this.finalDate = finalDate;
         } else {
-            throw new IllegalArgumentException("ERROR: parametri non validi.");
+            throw new IllegalArgumentException("ERROR: invalid finalDate.");
         }
     }
 
@@ -24,6 +34,14 @@ public class Vacanza {
 
     public long getHolidayDuration() {
         return DAYS.between(startDate, finalDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Hai prenotato una vacanza di } " + getHolidayDuration() +
+                "giorni a " + destination +
+                "dal " + startDate +
+                "al " + finalDate;
     }
 
     /* VALIDATE FUNCTIONS */

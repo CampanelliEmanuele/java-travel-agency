@@ -3,8 +3,6 @@ package vacanza;
 import java.time.LocalDate;
 
 public class GroupHoliday extends Holiday {
-
-    // ove inseriamo il numero di partecipanti e la fascia d’età
     private int numberOfPeople, mediumAge;
 
     public GroupHoliday(String destination, LocalDate startDate, LocalDate finalDate, int numberOfPeople, int mediumAge) throws IllegalArgumentException {
@@ -33,5 +31,25 @@ public class GroupHoliday extends Holiday {
                 " per un totale di " + numberOfPeople +
                 " persone, aventi un'età media di " + mediumAge +
                 " anni";
+    }
+
+    /* GETTERS AND SETTERS */
+
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        if (isInRange(numberOfPeople, 2, 100))
+            this.numberOfPeople = numberOfPeople;
+    }
+
+    public int getMediumAge() {
+        return mediumAge;
+    }
+
+    public void setMediumAge(int mediumAge) {
+        if (isInRange(mediumAge, 0, 100))
+            this.mediumAge = mediumAge;
     }
 }

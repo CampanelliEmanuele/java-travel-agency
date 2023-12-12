@@ -38,10 +38,10 @@ public class Holiday {
 
     @Override
     public String toString() {
-        return "Hai prenotato una vacanza di } " + getHolidayDuration() +
-                "giorni a " + destination +
-                "dal " + startDate +
-                "al " + finalDate;
+        return "Hai prenotato una vacanza di " + getHolidayDuration() +
+                " giorni a " + destination +
+                " dal " + startDate +
+                " al " + finalDate;
     }
 
     /* VALIDATE FUNCTIONS */
@@ -86,5 +86,4 @@ public class Holiday {
         if (validFinalDate(finalDate, startDate))
             this.finalDate = finalDate;
     }
-
 }

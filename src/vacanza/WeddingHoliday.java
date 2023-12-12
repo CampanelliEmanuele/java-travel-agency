@@ -26,4 +26,15 @@ public class WeddingHoliday extends Holiday {
         return super.toString() +
                 " includente i seguenti trattamenti: " + treatments;
     }
+
+    /* GETTERS AND SETTERS */
+
+    public ArrayList<String> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(ArrayList<String> treatments) {
+        if (validTreatments(treatments))
+            this.treatments = treatments;
+    }
 }

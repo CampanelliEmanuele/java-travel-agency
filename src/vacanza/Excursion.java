@@ -3,41 +3,39 @@ package vacanza;
 public class Excursion {
     private String city;
     private int duration;
-    private double price;
+    private final double price;
 
     public Excursion(String city, int duration) throws IllegalArgumentException {
-        if (validCity(city)) {
-            this.city = city;
-        } else {
-            throw new IllegalArgumentException("ERROR: Inserire una città valida.");
-        }
+        validCity(city);
+        this.city = city;
 
-        if (validDuration(duration)) {
-            this.duration = duration;
-        } else {
-            throw new IllegalArgumentException("ERROR: Inserire una durata compresa tra le 1 e le 8 ore.");
-        }
+        validDuration(duration);
+        this.duration = duration;
 
         this.price = 15 * duration;
     }
 
+    /* VALIDATORS */
+
+    private void validCity(String city) {
+        if (city == null || city.length() <= 2)
+            throw new IllegalArgumentException("ERROR: Inserire una città valida.");
+    }
+
+    private void validDuration(int duration) {
+        if (duration <= 1 || duration >= 8)
+            throw new IllegalArgumentException("ERROR: Inserire una durata compresa tra le 1 e le 8 ore.");
+    }
+
     /* GETTERS AND SETTERS */
-
-    private boolean validCity(String city) {
-        return city != null && city.length() >= 2;
-    }
-
-    private boolean validDuration(int duration) {
-        return duration >= 1 && duration <= 8;
-    }
 
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
-        if (validCity(city))
-            this.city = city;
+        validCity(city);
+        this.city = city;
     }
 
     public int getDuration() {
@@ -45,8 +43,8 @@ public class Excursion {
     }
 
     public void setDuration(int duration) {
-        if (validDuration(duration))
-            this.duration = duration;
+        validDuration(duration);
+        this.duration = duration;
     }
 
     public double getPrice() {

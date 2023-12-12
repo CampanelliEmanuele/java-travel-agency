@@ -10,21 +10,21 @@ public class WeddingHoliday extends Holiday {
     public WeddingHoliday(String destination, LocalDate startDate, LocalDate finalDate, ArrayList<String> treatments) throws IllegalArgumentException {
         super(destination, startDate, finalDate);
 
-        if (validTreatments(treatments)) {
-            this.treatments = treatments;
-        } else {
-            throw new IllegalArgumentException("ERORR: La lista dei trattamenti inserita non è valida.");
-        }
-    }
-
-    private boolean validTreatments(ArrayList<String> treatments) {
-        return treatments != null;
+        validTreatments(treatments);
+        this.treatments = treatments;
     }
 
     @Override
     public String toString() {
         return super.toString() +
                 " includente i seguenti trattamenti: " + treatments;
+    }
+
+    /* VALIDATORS */
+
+    private void validTreatments(ArrayList<String> treatments) {
+        if (treatments == null)
+            throw new IllegalArgumentException("ERORR: La lista dei trattamenti inserita non è valida.");
     }
 
     /* GETTERS AND SETTERS */
@@ -34,7 +34,7 @@ public class WeddingHoliday extends Holiday {
     }
 
     public void setTreatments(ArrayList<String> treatments) {
-        if (validTreatments(treatments))
-            this.treatments = treatments;
+        validTreatments(treatments);
+        this.treatments = treatments;
     }
 }

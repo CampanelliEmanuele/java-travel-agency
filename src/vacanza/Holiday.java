@@ -10,27 +10,15 @@ public class Holiday {
     private String destination;
     private LocalDate startDate;
     private LocalDate finalDate;
-
     private ArrayList<Excursion> excursionsList;
 
     public Holiday(String destination, LocalDate startDate, LocalDate finalDate) throws IllegalArgumentException {
-        if (validDestination(destination)) {
-            this.destination = destination;
-        } else {
-            throw new IllegalArgumentException("ERROR: invalid destination.");
-        }
-
-        if (validStartDate(startDate)) {
-            this.startDate = startDate;
-        } else {
-            throw new IllegalArgumentException("ERROR: invalid  startDate.");
-        }
-
-        if (validFinalDate(finalDate, startDate)) {
-            this.finalDate = finalDate;
-        } else {
-            throw new IllegalArgumentException("ERROR: invalid finalDate.");
-        }
+        validDestination(destination);
+        this.destination = destination;
+        validStartDate(startDate);
+        this.startDate = startDate;
+        validFinalDate(finalDate, startDate);
+        this.finalDate = finalDate;
     }
 
     /* EXERCISE FUNCTIONS */
@@ -55,18 +43,21 @@ public class Holiday {
         return totalPrice;
     }
 
-    /* VALIDATE FUNCTIONS */
+    /* VALIDATORS */
 
-    private boolean validDestination(String destination) {
-        return destination != null && !destination.isEmpty();
+    private void validDestination(String destination) {
+        if (destination == null || destination.isEmpty())
+            throw new IllegalArgumentException("ERROR: invalid destination.");
     }
 
-    private boolean validStartDate(LocalDate startDate) {
-        return startDate.isAfter(LocalDate.now());
+    private void validStartDate(LocalDate startDate) {
+        if (startDate.isBefore(LocalDate.now()))
+            throw new IllegalArgumentException("ERROR: invalid  startDate.");
     }
 
-    private boolean validFinalDate(LocalDate finalDate, LocalDate startDate) {
-        return finalDate.isAfter(startDate);
+    private void validFinalDate(LocalDate finalDate, LocalDate startDate) {
+        if (finalDate.isBefore(startDate))
+            throw new IllegalArgumentException("ERROR: invalid finalDate.");
     }
 
     /* GETTERS AND SETTERS */
@@ -76,8 +67,8 @@ public class Holiday {
     }
 
     public void setDestination(String destination) {
-        if (validDestination(destination))
-            this.destination = destination;
+        validDestination(destination);
+        this.destination = destination;
     }
 
     public LocalDate getStartDate() {
@@ -85,8 +76,8 @@ public class Holiday {
     }
 
     public void setStartDate(LocalDate startDate) {
-        if (validStartDate(startDate))
-            this.startDate = startDate;
+        validStartDate(startDate);
+        this.startDate = startDate;
     }
 
     public LocalDate getFinalDate() {
@@ -94,8 +85,8 @@ public class Holiday {
     }
 
     public void setFinalDate(LocalDate finalDate) {
-        if (validFinalDate(finalDate, startDate))
-            this.finalDate = finalDate;
+        validFinalDate(finalDate, startDate);
+        this.finalDate = finalDate;
     }
 
     public ArrayList<Excursion> getExcursionsList() {

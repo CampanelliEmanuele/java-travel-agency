@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class Vacanza {
+public class Holiday {
 
     private String destination;
     private LocalDate startDate;
     private LocalDate finalDate;
 
-    public Vacanza(String destination, LocalDate startDate, LocalDate finalDate) throws IllegalArgumentException {
+    public Holiday(String destination, LocalDate startDate, LocalDate finalDate) throws IllegalArgumentException {
         if (validDestination(destination)) {
             this.destination = destination;
         } else {

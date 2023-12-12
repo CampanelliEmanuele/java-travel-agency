@@ -1,18 +1,15 @@
 package vacanza;
 
-import java.time.DayOfWeek;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Scanner;
 
-public class Main {
+public class Agency {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean stop = false;
 
         while (!stop) {
+
             /* Get destination */
             System.out.println("Inserimento dati per una nuova vacanza");
             System.out.println("Inserire la destinazione: ");
@@ -29,7 +26,7 @@ public class Main {
             LocalDate endDate = LocalDate.parse(inputDate);
 
             /* Create a new object */
-            Vacanza v = new Vacanza(destination, startDate, endDate);
+            Holiday v = new Holiday(destination, startDate, endDate);
             System.out.println("Tutti i dati inseriti sono corretti, ho creato l'oggetto");
 
             /* object print */

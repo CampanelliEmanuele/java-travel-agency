@@ -11,13 +11,18 @@ public class Agency {
 
         /* Lists of holiday types */
         ArrayList<Holiday> holidayList = new ArrayList<>();
-        ArrayList<Holiday> groupHolidayList = new ArrayList<>();
-        ArrayList<Holiday> weddingHolidayList = new ArrayList<>();
+        ArrayList<GroupHoliday> groupHolidayList = new ArrayList<>();
+        ArrayList<WeddingHoliday> weddingHolidayList = new ArrayList<>();
+        ArrayList<Excursion> defaultExcursions = new ArrayList<>();
+
+        defaultExcursions.add(new Excursion("city1", 1));
+        defaultExcursions.add(new Excursion("city2", 2));
+        defaultExcursions.add(new Excursion("city3", 3));
+        defaultExcursions.add(new Excursion("city4", 4));
 
         while (!stop) {
-
             try {
-                System.out.println("Seleziona il tipo di vacanza:\n1. Vacanza classica\n2. Vacanda in gruppo\n3. Viaggio di nozze");
+                System.out.print("Seleziona il tipo di vacanza:\n1. Vacanza classica\n2. Vacanda in gruppo\n3. Viaggio di nozze");
                 int holidayType = Integer.parseInt(scanner.nextLine());
 
                 /* Get destination */
@@ -39,6 +44,7 @@ public class Agency {
                     case 1:     // vacanza classica
                         /* Create a new object and add it to the list */
                         Holiday holiday = new Holiday(destination, startDate, endDate);
+                        holiday.setExcursionsList(defaultExcursions);
                         holidayList.add(holiday);
 
                         /* object print */
@@ -53,6 +59,7 @@ public class Agency {
 
                         /* Create a new object and add it to the list */
                         GroupHoliday groupHoliday = new GroupHoliday(destination, startDate, endDate, numberOfPeople, mediumAge);
+                        groupHoliday.setExcursionsList(defaultExcursions);
                         groupHolidayList.add(groupHoliday);
 
                         /* object print */
@@ -75,6 +82,8 @@ public class Agency {
                         }
                         /* Create a new object and add it to the list */
                         WeddingHoliday weddingHoliday = new WeddingHoliday(destination, startDate, endDate, treatments);
+                        weddingHoliday.setExcursionsList(defaultExcursions);
+                        weddingHolidayList.add(weddingHoliday);
 
                         /* object print */
                         System.out.println(weddingHoliday);
@@ -91,6 +100,25 @@ public class Agency {
                 }
             }
         }
+
+        /* Print the total price of all excursions */
+        double totalExcursionPrice = 0;
+        for (Excursion excursion : defaultExcursions)
+            totalExcursionPrice += excursion.getPrice();
+        System.out.println("Il prezzo totale della lista di escursioni ammonta a: " + totalExcursionPrice);
+
+        /* Print the total price of all excursions of all holidays */
+        totalExcursionPrice = 0;
+        for (Holiday holiday : holidayList)
+            totalExcursionPrice += holiday.getExcursionsPrice();
+
+        for (GroupHoliday groupHoliday : groupHolidayList)
+            totalExcursionPrice += groupHoliday.getExcursionsPrice();
+
+        for (WeddingHoliday weddingHoliday : weddingHolidayList)
+            totalExcursionPrice += weddingHoliday.getExcursionsPrice();
+
+        System.out.println("Il prezzo totale di tutte le escursioni di ogni vacanza inserita ammonta a: " + totalExcursionPrice);
     }
 }
 
